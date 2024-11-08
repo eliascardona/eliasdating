@@ -1,16 +1,15 @@
-import React from 'react'
-import styles from "../styles/loader.module.css"
+import "../assets/css/loader.css"
 
-export const Loader = () => {
+export default function Loader () {
     return (
-        <div className={styles.modalContainer}>
-            <div className={styles.mainLy}>
-                <div className={styles.child}>
+        <div className="modalContainer">
+            <div className="mainLy">
+                <div className="child">
                     <div>
-                        <h1 className={styles.title}>
+                        <h1 className="title">
                             DATE UN
                             <br/>
-                            <span className={styles.font}>
+                            <span className="font">
                                 DATE
                             </span>
                         </h1>

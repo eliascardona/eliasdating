@@ -1,10 +1,9 @@
-import React from 'react'
-import styles from "../../styles/button.module.css"
+import "../../assets/css/button.css"
 
 export const Button = ({ clickAction }) => {
     return (
-        <div className={styles.btnPos}>
-            <button type="button" className={styles.specialBtn} onClick={clickAction}>
+        <div className="btnPos">
+            <button type="button" className="specialBtn" onClick={clickAction}>
                 <span>confesar lige</span>
             </button>
         </div>

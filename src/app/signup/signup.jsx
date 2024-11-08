@@ -1,19 +1,16 @@
-import React from 'react'
 import { Signup } from '../../components/vitals/Signup'
 import { PageHeader } from '../../components/utils/PageHeader'
-import styles from '../styles/login.module.css'
+import '../../assets/css/login.css'
 
-function signup() {
+export default function SignUpPage() {
   return (
     <>
       <PageHeader />
-      <div className={styles.centeredGrid}>
-        <div className={styles.cardWhite}>
+      <div className="centeredGrid">
+        <div className="cardWhite">
           <Signup />
         </div>
       </div>
     </>
   )
 }
-
-export default signup

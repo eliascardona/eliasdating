@@ -1,21 +1,20 @@
-import React from "react";
-import { auth } from "../../firebase/base";
+import { auth } from "../../lib/sdk/firebase";
 import { signOut } from "firebase/auth";
-import styles from "../../styles/pageheader.module.css"
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
+import "../../assets/css/pageheader.css"
 
 export const PageHeader = () => {
-  const router = useRouter()
+  // const router = useRouter()
   return (
     <>
-      <header className={styles.headerStyles}>
+      <header className="headerStyles">
         <div>
-          <span className={styles.linkStyle} onClick={() => router.push("/")}>
-            <span className={styles.text}>
+          <span className="linkStyle" onClick={() => redirect(`${window.location.origin}`)}>
+            <span className="text">
               DATE UN
             </span>
             {" "}
-            <span className={styles.font}>
+            <span className="font">
               DATE
             </span>
           </span>

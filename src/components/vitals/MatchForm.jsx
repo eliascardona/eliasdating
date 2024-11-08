@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { firestore } from '../../firebase/base';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { auth, firestore } from '../../lib/sdk/firebase';
 import {
   arrayUnion,
   collection,
@@ -12,12 +12,13 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore';
-import styles from '../../styles/forms.module.css';
-import { nm } from '../../utils/utils';
-import { AuthContext } from '../../contexts/AuthContext';
+import { numeroAleatorio } from '../../lib/utils/utils'
+// import { AuthContext } from '../../contexts/AuthContext';
+import '../../assets/css/forms.css';
 
-export const MatchForm = ({setOpenModal}) => {
-  const authData = useContext(AuthContext);
+
+export const MatchForm = () => {
+  // const authData = useContext(AuthContext);
   const [owner, setOwner] = useState();
   const [err, setErr] = useState('');
   const usernameRef = useRef();
@@ -39,25 +40,27 @@ export const MatchForm = ({setOpenModal}) => {
       }
     );
     return unsubscribe;
-  }, [authData]);
+  }, [auth]);
 
   //get owner data
   useEffect(() => {
+    if (auth.currentUser === null) return
+
     const q = query(
       collection(firestore, 'users'),
-      where('email', '==', authData.user ? authData.user.email : '')
+      where('email', '==', auth.currentUser ? auth.currentUser.email : '')
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       querySnapshot.docs[0] && setOwner(querySnapshot.docs[0].data());
     });
     return unsubscribe;
-  }, [authData]);
+  }, [auth]);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
       collection(firestore, 'ganadores'),
       (querySnapshot) => {
-        const data = [];
+        let data = [];
         querySnapshot.forEach((doc) => {
           data.push(doc.data());
         });
@@ -78,15 +81,12 @@ export const MatchForm = ({setOpenModal}) => {
     setDisabled(true)
     const usersRef = collection(firestore, 'users');
 
-    //Si el usuario no ingreso el "@" lo ingresamos nosotros.
-    mainSubject = mainSubject.trim(); //Elimina espacios en las puntas.
-    if (mainSubject[0] != '@') {
-      mainSubject = `@${mainSubject}`;
-      //Pendiente, no prioridad: Aquí se deben de eliminar todos los espacios (HECHO)
-      //Ejemplo '@alex '
+    const trimmedMainSubject = mainSubject.trim();
+    if (trimmedMainSubject[0] != '@') {
+      trimmedMainSubject = `@${trimmedMainSubject}`;
     }
 
-    if (mainSubject == owner.username) {
+    if (trimmedMainSubject == owner.username) {
       setErr('No puedes ingresar tu propio usuario.');
       return;
     }
@@ -112,7 +112,7 @@ export const MatchForm = ({setOpenModal}) => {
         setErr("")        
         return
       }
-      let docID = `p${nm()}`;
+      let docID = `p${numeroAleatorio()}`;
       let date = new Date();
       await updateDoc(doc(firestore, 'users', objetoDestinatario.email), {
         likes: arrayUnion(owner.username),
@@ -138,7 +138,8 @@ export const MatchForm = ({setOpenModal}) => {
         const usersArr = [
           usernameRemitente,
           objetoDestinatario.username,
-        ].sort();
+        ]
+        const sortedUsersArray = usersArr.sort()
         //Agregar doc con sus respectivos matches
         await setDoc(
           doc(
@@ -147,7 +148,7 @@ export const MatchForm = ({setOpenModal}) => {
             `${usernameRemitente}-${objetoDestinatario.username}`
           ),
           {
-            users: usersArr,
+            users: sortedUsersArray,
             timestamp: date.toISOString(),
           }
         );
@@ -155,12 +156,12 @@ export const MatchForm = ({setOpenModal}) => {
         if (
           ganadores.porPrimerosMatches.matches.length < 3 &&
           ganadores.porPrimerosMatches.matches.filter(
-            (i) => JSON.stringify(i.personas) == JSON.stringify(usersArr)
+            (i) => JSON.stringify(i.personas) == JSON.stringify(sortedUsersArray)
           ).length == 0
         ) {
           updateDoc(doc(firestore, 'ganadores', 'porPrimerosMatches'), {
             matches: arrayUnion({
-              personas: usersArr,
+              personas: sortedUsersArray,
               timestamp: date.toISOString(),
             }),
           });
@@ -178,14 +179,14 @@ export const MatchForm = ({setOpenModal}) => {
   };
 
   return (
-    <div className={styles.mainLy}>
+    <div className="mainLy">
       <h2>¡Confiesa tu ligue!</h2>
       <h3>Escribe el username de tu crush</h3>
       <input
         type="text"
         ref={usernameRef}
         placeholder="@micrush"
-        className={styles.input}
+        className="input"
         onChange={(e) => {
           e.preventDefault();
           setMainSubject(e.target.value);
@@ -194,10 +195,11 @@ export const MatchForm = ({setOpenModal}) => {
       <button
         type="button"
         onClick={() => {
-          confessCrush()          
+          confessCrush()
+          // setOpenModal(b => !b)
         }}
         disabled={disabled || !owner}
-        className={styles.formBtn}
+        className="formBtn"
       >
         enviar
       </button>
@@ -206,9 +208,9 @@ export const MatchForm = ({setOpenModal}) => {
         {succesMsg}
       </strong>
       <br />
-      <p className={styles.alertLabel}>{err}</p>
+      <p className="alertLabel">{err}</p>
       <h3>Lista de usuarios registrados: </h3>
-      <div className={styles.scrollable}>
+      <div className="scrollable">
         {users.map((usr) => {
           return (
             <span style={{ display: 'block' }} key={usr.username}>

@@ -1,42 +1,48 @@
-import React, { useRef } from "react"
-import { auth } from "../firebase/base"
+import { useRef } from "react"
+import { auth } from "../../lib/sdk/firebase"
 import { sendPasswordResetEmail } from "firebase/auth"
-import { useRouter } from "next/router"
 import { PageHeader } from '../../components/utils/PageHeader'
-import styles from "../styles/forgotpass.module.css"
+import "../../assets/css/forgotPassword.css"
 
-function forgotPass() {
-  const router = useRouter()
+export default function ForgotPass() {
   const emailRef = useRef()
+  const msgRef = useRef(null)
 
   const requestLink = async (e) => {
     e.preventDefault()
-    let userEmail = emailRef.current.value
+    let userEmail = emailRef.current?.value
     await sendPasswordResetEmail(auth, userEmail)
-    router.push("/login")
+    msgRef.current.style.display = 'block'
+
+    setTimeout(() => {
+      redirect(`${window.location.origin}/login`)      
+    }, 2000)
   }
   
   return (
     <>
       <PageHeader />
-      <div className={styles.centeredGrid}>
-        <div className={styles.cardWhite}>
+      <div className="centeredGrid">
+        <div className="cardWhite">
           <h2>Recuperar contraseña</h2>
             <span>Ingresa el correo con el que te registraste</span>
             <input
               type="email"
               ref={emailRef}
               placeholder="name@somemail.com"
-              className={styles.input}
+              className="input"
             />
             <button
               type="button"
               onClick={requestLink}
-              className={styles.formBtn}
+              className="formBtn"
             >
               Enviar código
             </button>
-            <small className={styles.payMsg} onClick={() => router.push("/login")}>
+            <span className="formDynamicMsg" ref={msgRef}>
+              {"hemos enviado el código a tu correo electrónico, revisa tu bandeja de entrada"}
+            </span>
+            <small className="formMsg" onClick={() => redirect(`${window.location.origin}/login`)}>
               Regresar al login
             </small>
           </div>
@@ -44,5 +50,3 @@ function forgotPass() {
     </>
   )
 }
-
-export default forgotPass

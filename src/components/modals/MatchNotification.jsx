@@ -1,16 +1,15 @@
-import React from 'react'
-import styles from "../../styles/notification.module.css"
+import "../../assets/css/notification.css"
 
 export const MatchNotification = ({ openNotif, setOpenNotif, notTo, notifStatesParam }) => {
     return (
     <>
         {openNotif && 
-        <div className={styles.globalContainer}>
-            <div className={styles.modalContainer}>
-                <div className={styles.mainLy} style={{gridTemplateColumns:`${notifStatesParam.length<2?'100%':'8% 82% 8%'}`}}>
+        <div className="globalContainer">
+            <div className="modalContainer">
+                <div className="mainLy" style={{gridTemplateColumns:`${notifStatesParam.length<2?'100%':'8% 82% 8%'}`}}>
                     {/* ------------------------- */}
                     <div 
-                        className={styles.child} 
+                        className="child" 
                         style={{height:'80%', width:'200%', display:`${notifStatesParam.length<2?'none':'block'}`}} 
                         onClick={setOpenNotif}
                     >
@@ -19,8 +18,8 @@ export const MatchNotification = ({ openNotif, setOpenNotif, notTo, notifStatesP
                         </div>
                     </div>
                     {/* ------------------------- */}
-                    <div className={styles.center}>
-                        <h2 className={styles.title}>
+                    <div className="center">
+                        <h2 className="title">
                             {
                                 notifStatesParam.length < 2 ? 'FELICIDADES, HICISTE MATCH CON' : 'FELICIDADES, ESTOS SON TUS MATCHES'
                             }
@@ -28,13 +27,13 @@ export const MatchNotification = ({ openNotif, setOpenNotif, notTo, notifStatesP
                         <ion-icon style={{fontSize:'64px'}} name="heart"></ion-icon>
                         <h2>{notTo}</h2>
                         <p>¡has hecho match, ve y haz lo tuyo!</p>
-                        <span className={styles.close} style={{display:`${notifStatesParam.length<2?'block':'none'}`}} onClick={setOpenNotif}>
+                        <span className="close" style={{display:`${notifStatesParam.length<2?'block':'none'}`}} onClick={setOpenNotif}>
                             cerrar
                         </span>
                     </div>
                     {/* ------------------------- */}
                     <div 
-                        className={styles.child} 
+                        className="child" 
                         style={{height:'80%', width:'200%', display:`${notifStatesParam.length<2?'none':'block'}`}} 
                         onClick={setOpenNotif}
                     >

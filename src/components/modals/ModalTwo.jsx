@@ -1,15 +1,14 @@
-import React from 'react'
 import { MatchForm } from '../vitals/MatchForm'
-import styles from "../../styles/modal.module.css"
+import "../../assets/css/modal.css"
 
 export const ModalTwo = ({ openModal, setOpenModal }) => {
     return (
         openModal &&
-        <div className={styles.globalContainer}>
-            <div className={styles.modalContainer}>
-                <div className={styles.mainLy}>
-                    <MatchForm setOpenModal={setOpenModal} />
-                    <button type="button" className={styles.specialBtn} onClick={() => setOpenModal(false)}>
+        <div className="globalContainer">
+            <div className="modalContainer">
+                <div className="mainLy">
+                    <MatchForm />
+                    <button type="button" className="specialBtn" onClick={() => setOpenModal(false)}>
                         cerrar
                     </button>
                 </div>

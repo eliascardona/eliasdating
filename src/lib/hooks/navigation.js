@@ -12,8 +12,8 @@ const routerListenerHook = (setLoading) => {
 
         const stopLoading = () => {
             setTimeout(() => {
-                setLoading(false), 1000
-            })
+                setLoading(false)
+            }, 1000)
         }
 
         startLoading()

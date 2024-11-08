@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.55rem;
+  letter-spacing: -0.015rem;
+  color: inherit;
+  background: #f7f7f7;
+}
+
+a {
+  color: rgb(0, 108, 250);
+}
+
+button {
+  cursor: pointer;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* place-items: center;
+  justify-self: center; */
+}
+
+ion-icon {
+	font-size: 24px;
+}
+
+@media (min-width: 300px) and (max-width: 679px) {
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #444444;
+  border-radius: 12px;
+}

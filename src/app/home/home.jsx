@@ -1,5 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import { firestore } from '../firebase/base';
+import { useEffect, useState } from 'react';
+import { auth, firestore } from '../../lib/sdk/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import {
   collection,
   onSnapshot,
@@ -10,27 +11,43 @@ import { Card } from '../../components/utils/Card';
 import { PageHeader } from '../../components/utils/PageHeader';
 import { ModalTwo } from '../../components/modals/ModalTwo';
 import { MatchNotification } from '../../components/modals/MatchNotification';
-import { AuthContext } from '../contexts/AuthContext';
-import styles from "../styles/home.module.css"
+import '../../assets/css/home.css';
 
-function Home() {
-  const authData = useContext(AuthContext)
+export default function HomePage() {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [owner, setOwner] = useState();
+  const [ownerName, setOwnerName] = useState('');
+  const [currentUser, setcurrentUser] = useState(null);
   
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        setcurrentUser(p => p)
+      }
+      setcurrentUser({...user})
+    })
+  },[auth]);
+
   //Fetch datos del usuario
   useEffect(() => {
-    const q = query(
-      collection(firestore, 'users'),
-      where('email', '==', authData.user ? authData.user.email : "")
-      );
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.docs[0] && setOwner(querySnapshot.docs[0].data());
-      });
-      return unsubscribe;
-  }, [authData]);
+    if(auth === null || currentUser === null) return
+      const q = query(
+        collection(firestore, 'users'),
+        where('email', '==', currentUser ? currentUser.email : "")
+      )
+      const unsubscribe = onSnapshot(q, 
+        (querySnapshot) => {
+              const ownerTemp = querySnapshot.docs[0].data()
+              if(ownerTemp != null) {
+                setOwner({ ...ownerTemp })
+                setOwnerName(ownerTemp.username)
+              }
+        }
+      )
+      return unsubscribe
+  }, [auth, currentUser])
     
   //Fetch datos de todos los usuarios
   useEffect(() => {
@@ -52,16 +69,16 @@ function Home() {
     const unsubscribe = onSnapshot(
       collection(firestore, 'posts'),
       (querySnapshot) => {
-        const data = [];
+        let data = [];
         querySnapshot.forEach((doc) => {
           data.push(doc.data());
         });
-        data = data.sort((a, b) => b.timestamp - a.timestamp)
-        setPosts(data);
+        const sortedData = data.sort((a, b) => b.timestamp - a.timestamp)
+        setPosts(sortedData);
       }
     );
     return unsubscribe;
-  }, []);
+  }, [ownerName.length]);
 
   const [matches, setMatches] = useState([]);
   //Estado de apertura de notificaciones de match según la cant de matches, hay n notifs. ej: [true, false, true]
@@ -98,8 +115,8 @@ function Home() {
   return (
     <>
       <PageHeader />
-      <h1 className={styles.title}>ADAM LIKES YOU</h1>
-      <div className={styles.container}>
+      <h1 className='title'>ADAM LIKES YOU</h1>
+      <div className='container'>
         {posts.map((post, i, arr) => {
           return (
             <Card
@@ -110,7 +127,7 @@ function Home() {
             />
           )
         })}
-        <button type="button" className={styles.specialBtn} onClick={() => setOpenModal(true)}>
+        <button type="button" className='specialBtn' onClick={() => setOpenModal(true)}>
           CONFESAR LIGUE
         </button>
         {openModal && (
@@ -136,5 +153,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;

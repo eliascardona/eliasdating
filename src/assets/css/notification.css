@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.globalContainer {
+	width: 100%;
+	height: 100%;
+	background-color: rgb(46 56 77 / 30%);
+	z-index: 0;
+	display: grid;
+	place-items: center;
+	align-self: center;
+}
+
+.modalContainer {
+	width: 100%;
+	height: 100%;
+	pointer-events: auto;
+	position: fixed;
+	top: 0;
+	z-index: 2;
+	background: linear-gradient(90deg, #9d50bb, #2a5ce6);
+	color: #fefefe;
+	border: 1px solid rgb(24, 24, 24);
+	border-radius: 4px;
+	outline: 0;
+	margin: 0 auto;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.mainLy {
+    display: grid;
+	place-items: center;
+	/* grid-template-columns: 8% 82% 8%; */
+	padding: 9.5em 0 5em 0;
+}
+
+.child {
+	padding: 0 1em 0 1em;
+    display: grid;
+	place-items: center;
+	text-align: center;
+	height:80%;
+	width:200%;
+}
+
+.center {
+    display: grid;
+	place-items: center;
+	row-gap: 1.5em;
+	text-align: center;
+}
+
+.title {
+	font-family: 'Pacifico', cursive;
+	line-height: 1.5em;
+}
+
+.close {
+	font-family: 'Pacifico', cursive;
+	font-size: 2em;
+	text-decoration: underline;
+	cursor: pointer;
+	pointer-events: auto;
+}

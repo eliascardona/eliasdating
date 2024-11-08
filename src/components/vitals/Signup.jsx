@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { auth, firestore } from "../../firebase/base";
+import { useEffect, useRef, useState } from "react";
+import { auth, firestore } from "../../lib/sdk/firebase";
 import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { 
   collection,
@@ -9,15 +9,16 @@ import {
   getDocs,
   setDoc
 } from "firebase/firestore";
-import styles from "../../styles/forms.module.css";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
+import "../../assets/css/forms.css";
+import { redirect } from "react-router-dom";
+
 
 export const Signup = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const nameRef = useRef();
   const usernameRef = useRef();
-  const router = useRouter();
   const [username, setUsername] = useState("")
   const [usernameAllowed, setUsernameAllowed] = useState(false)
   const [showErr, setShowErr] = useState(false)
@@ -25,18 +26,19 @@ export const Signup = () => {
   useEffect(() => {
     async function checkUsername() {
       const usersRef = collection(firestore, "users")
-      const q = query(usersRef, where("username", "==", `@${username.trim()}`))
+      const q = query(
+        usersRef,
+        where("username", "==", `@${username.trim()}`)
+      )
       const querySnapshot = await getDocs(q)
       setUsernameAllowed(querySnapshot.docs.length === 0)
-      //Pendiente, no prioridad: Aquí se deben de eliminar todos los espacios
-      // ejemplo '@alex '
     }
     checkUsername()
     return (setUsernameAllowed(undefined))
   }, [username])
 
   const signUp = async () => {
-    const name = nameRef.current.value;
+    let name = nameRef.current.value;
     name = name.trim()
     //Ponemos la primer letra de cada palabra del nombre en mayúscula.
     if(name.length > 0) {
@@ -46,14 +48,16 @@ export const Signup = () => {
       }
       name = words.join(" ")
     }
-    const userName = usernameRef.current.value;
+    let userName = usernameRef.current.value;
     username = username.trim()
-    const email = emailRef.current.value;
+    let email = emailRef.current.value;
     email = email.trim()
-    const password = passwordRef.current.value;
+
+    let password = passwordRef.current.value;
     password = password.trim()
+
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    usernameAllowed && await setDoc(doc(firestore, `users/${res.user.email}`), {
+    await setDoc(doc(firestore, `users/${res.user.email}`), {
       email: res.user.email,
       id: res.user.uid,
       nombre: name,
@@ -72,7 +76,7 @@ const handleSignUp = async (e) => {
   setShowErr(false)
   if(usernameAllowed) {
     signUp()
-    router.push("/")
+    redirect(`${window.location.origin}`)
   } else {
     setShowErr(true)
   }
@@ -81,57 +85,59 @@ const handleSignUp = async (e) => {
   return (
     <>
       <h2>Crear cuenta</h2>
-      <span className={styles.label}>Nombre y Apellido</span>
+      <span className="label">Nombre y Apellido</span>
       <input
         type="text"
         ref={nameRef}
         placeholder="Nombre"
-        className={styles.input}
+        className="input"
       />
-      <span className={styles.label}>username, no escribir @</span>
+      <span className="label">username, no escribir @</span>
       <input
         type="text"
         ref={usernameRef}
         onChange={(e) => setUsername(e.target.value)}
         placeholder="username"
-        className={styles.input}
+        className="input"
       />
       {
         showErr && 
-        <span className={styles.alertLabel}>
+        <span className="alertLabel">
           username en uso, escoge otro 😥
         </span>
       }
-      <span className={styles.label}>Email</span>
+      <span className="label">Email</span>
       <input
         type="email"
         ref={emailRef}
         placeholder="name@somemail.com"
-        className={styles.input}
+        className="input"
       />
-      <span className={styles.label}>Contraseña</span>
+      <span className="label">Contraseña</span>
       <input
         type="password"
         ref={passwordRef}
         placeholder="mypass123"
-        className={styles.input}
+        className="input"
       />
       <button
         type="button"
-        className={styles.formBtn}
+        className="formBtn"
         onClick={handleSignUp}
         disabled={usernameAllowed === undefined}
       >
         Sign up
       </button>
-      <small className={styles.payMsg}>
+      <small className="payMsg">
         ¿Ya tienes cuenta?
-        <span onClick={()=> router.push("/login")} className="text-primary">
-          {" "}
-          <u style={{ cursor: "pointer" }}> Iniciar sesión</u>
+        <span 
+            className="text-primary"
+            onClick={() => redirect(`${window.location.origin}/login`)}
+          >
+          <u style={{ cursor: "pointer" }}>{" "}Iniciar sesión</u>
         </span>
       </small>
-      <small className={styles.payMsg}>
+      <small className="payMsg">
         Si ingresaste un email incorrecto, haz click
         <span onClick={logOut} className="text-primary">
           {" "}

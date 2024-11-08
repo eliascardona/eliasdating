@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react"
-import { auth } from "../../firebase/base"
+import { useRef, useState } from "react"
+import { auth } from "../../lib/sdk/firebase"
 import { signInWithEmailAndPassword } from "firebase/auth"
-import styles from "../../styles/forms.module.css"
-import { useRouter } from "next/router"
+// import { useRouter } from "next/router"
+import "../../assets/css/forms.css"
 
 export const Login = () => {
-  const router = useRouter()
+  // const router = useRouter()
   const emailRef = useRef()
   const passwordRef = useRef()
   const [error, setError] = useState("")
@@ -16,7 +16,7 @@ export const Login = () => {
       const email = emailRef.current.value
       const password = passwordRef.current.value
       await signInWithEmailAndPassword(auth, email, password)
-      router.push("/")
+      redirect(`${window.location.origin}`)
     } catch(error) {
       let errorCode = error.code
       if (errorCode == "auth/wrong-password") {
@@ -33,34 +33,39 @@ export const Login = () => {
           type="email"
           ref={emailRef}
           placeholder="name@somemail.com"
-          className={styles.input}
+          className="input"
         />
         <span>Contraseña</span>
         <input
           type="password"
           ref={passwordRef}
           placeholder="mypass123"
-          className={styles.input}
+          className="input"
         />
         <button
           type="button"
           onClick={login}
-          className={styles.formBtn}
+          className="formBtn"
         >
           Login
         </button>
-        <small className={styles.payMsg} style={{color:'red'}}>
+        <small className="payMsg" style={{color:'red'}}>
           {error}
         </small>
-        <small className={styles.payMsg}>
+        <small className="payMsg">
           ¿Nuevo por aquí?
-          <span onClick={()=> router.push("/signup")} className="text-primary">
-            {" "}
-            <u style={{ cursor: "pointer" }}>Crear cuenta</u>
+          <span 
+            className="text-primary"
+            onClick={() => redirect(`${window.location.origin}/signup`)}
+          >
+            <u style={{ cursor: "pointer" }}>{" "}Crear cuenta</u>
           </span>
         </small>
-        <small className={styles.payMsg}>
-          <span onClick={() => router.push("/forgotPass")} className="text-primary">
+        <small className="payMsg">
+          <span 
+            className="text-primary"
+            onClick={() => redirect(`${window.location.origin}/password-recovery`)}
+          >
             <u style={{ cursor: "pointer" }}>
               ¿Olvidaste la contraseña?
             </u>
