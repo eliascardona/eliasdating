@@ -4,7 +4,7 @@ import {
   doc,
   onSnapshot,
 } from 'firebase/firestore'
-import "../../assets/css/stats.css"
+import '../../assets/css/stats.css'
 
 export default function WinnersPage() {
     const [masLikes, setMasLikes] = useState(null)
@@ -30,16 +30,16 @@ export default function WinnersPage() {
     }, [])
 
     return (
-        <div className="globalContainer">
-            <div className="mainLy">
+        <div className='globalContainer'>
+            <div className='mainLy'>
                 <div>
-                    <h1 className="title">GANADORES</h1>
+                    <h1 className='title'>GANADORES</h1>
                     <h1 style={{color:'red'}}>más guapx hasta ahora</h1>
                     <h2>
                         {
                             masLikes ? 
                             `${masLikes.username} con ${masLikes.likes} likes` : 
-                            "cargando..."
+                            'cargando...'
                         }
                     </h2>
                 </div>

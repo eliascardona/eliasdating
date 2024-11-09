@@ -1,8 +1,8 @@
-import { auth, firestore } from "@/lib/sdk/firebase"
+import { auth, firestore } from '@/lib/sdk/firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { doc, setDoc, updateDoc } from 'firebase/firestore'
 
-const createAccount = async (email="", name="", pass) => {
+const createAccount = async (email='', name='', pass) => {
     try {
         let res = await createUserWithEmailAndPassword(auth, email, pass)
         await setDoc(doc(firestore, `users/${res.user.email}`), {
@@ -12,20 +12,20 @@ const createAccount = async (email="", name="", pass) => {
         })
 
     } catch(error) {
-        let errorCode = ""
+        let errorCode = ''
         errorCode = error.code
-        console.log("auth error ocurred while creating account", errorCode)
+        console.log('auth error ocurred while creating account', errorCode)
     }
 }
 
-const updateAccountOnDB = async (userEmail="", customerId="") => {
+const updateAccountOnDB = async (userEmail='', customerId='') => {
     try {
         await updateDoc(doc(firestore, `users/${userEmail}`), {
             stripeCustomerId: customerId
         })
 
     } catch(error) {
-        console.log("error while updating account", error)
+        console.log('error while updating account', error)
     }
 }
 

@@ -31,11 +31,11 @@ export default function Page() {
   return (
     <LoaderUIHandler loading={loading} setLoading={setLoading}>
       <Routes>
-        <Route path="/" exact element={<HomePage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/password-recovery" element={<ForgotPass />} />
-        <Route path="/winners" element={<WinnersPage />} />
+        <Route path='/' exact element={<HomePage />} />
+        <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/password-recovery' element={<ForgotPass />} />
+        <Route path='/winners' element={<WinnersPage />} />
       </Routes>
     </LoaderUIHandler>
   )

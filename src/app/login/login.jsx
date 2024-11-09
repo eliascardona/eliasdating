@@ -6,8 +6,8 @@ export default function LoginPage() {
   return (
     <>
       <PageHeader />
-      <div className="centeredGrid">
-        <div className="cardWhite">
+      <div className='centeredGrid'>
+        <div className='cardWhite'>
           <Login />
         </div>
       </div>

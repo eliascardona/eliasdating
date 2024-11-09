@@ -22,28 +22,28 @@ const courseSlice = createSlice({
   },
   reducers: {
     resetPurchaseState: (state, action) => {
-      state.purchaseComplete = false;
-      state.paymentIntent = null;
+      state.purchaseComplete = false
+      state.paymentIntent = null
     },
     setPriceId: (state, action) => {
-      state.priceId = action.payload;
+      state.priceId = action.payload
     },
     completePurchase: (state) => {
-      state.purchaseComplete = true;
+      state.purchaseComplete = true
     }
   },
   extraReducers: builder => {
     builder
       .addCase(fetchCourseDetails.pending, (state, action) => {
-        state.error = null;
+        state.error = null
       })
       .addCase(fetchCourseDetails.fulfilled, (state, action) => {
-        state.courseDetails = action.payload;
-        state.loading = false;
+        state.courseDetails = action.payload
+        state.loading = false
       })
       .addCase(fetchCourseDetails.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
+        state.loading = false
+        state.error = action.error.message
       })
   }
 })
@@ -51,5 +51,5 @@ const courseSlice = createSlice({
 
 
 
-export const { setPriceId, resetPurchaseState } = courseSlice.actions;
-export default courseSlice.reducer;
+export const { setPriceId, resetPurchaseState } = courseSlice.actions
+export default courseSlice.reducer

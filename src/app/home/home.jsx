@@ -1,41 +1,44 @@
-import { useEffect, useState } from 'react';
-import { auth, firestore } from '../../lib/sdk/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { auth, firestore } from '../../lib/sdk/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
 import {
   collection,
   onSnapshot,
   query,
   where,
-} from 'firebase/firestore';
-import { Card } from '../../components/utils/Card';
-import { PageHeader } from '../../components/utils/PageHeader';
-import { ModalTwo } from '../../components/modals/ModalTwo';
-import { MatchNotification } from '../../components/modals/MatchNotification';
-import '../../assets/css/home.css';
+} from 'firebase/firestore'
+import { Card } from '../../components/utils/Card'
+import { PageHeader } from '../../components/utils/PageHeader'
+import { ModalTwo } from '../../components/modals/ModalTwo'
+import { MatchNotification } from '../../components/modals/MatchNotification'
+import '../../assets/css/home.css'
 
 export default function HomePage() {
-  const [posts, setPosts] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
-  const [owner, setOwner] = useState();
-  const [ownerName, setOwnerName] = useState('');
-  const [currentUser, setcurrentUser] = useState(null);
-  
+  const [posts, setPosts] = useState([])
+  const [users, setUsers] = useState([])
+  const [openModal, setOpenModal] = useState(false)
+  const [owner, setOwner] = useState()
+  const [ownerName, setOwnerName] = useState('')
+  const [currentUser, setCurrentUser] = useState(null)
+  const navigate = useNavigate()
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        setcurrentUser(p => p)
+        navigate('/signup')
+        setCurrentUser(p => p)
       }
-      setcurrentUser({...user})
+      setCurrentUser({...user})
     })
-  },[auth]);
+  },[auth])
 
   //Fetch datos del usuario
   useEffect(() => {
     if(auth === null || currentUser === null) return
       const q = query(
         collection(firestore, 'users'),
-        where('email', '==', currentUser ? currentUser.email : "")
+        where('email', '==', currentUser ? currentUser.email : '')
       )
       const unsubscribe = onSnapshot(q, 
         (querySnapshot) => {
@@ -54,63 +57,63 @@ export default function HomePage() {
     const unsubscribe = onSnapshot(
       collection(firestore, 'users'),
       (querySnapshot) => {
-        const res = [];
+        const res = []
         querySnapshot.forEach((doc) => {
-          res.push(doc.data());
-        });
-        setUsers(res);
+          res.push(doc.data())
+        })
+        setUsers(res)
       }
-    );
+    )
     return unsubscribe
-  }, []);
+  }, [])
   
   //Fetch de todos los posts
   useEffect(() => {
     const unsubscribe = onSnapshot(
       collection(firestore, 'posts'),
       (querySnapshot) => {
-        let data = [];
+        let data = []
         querySnapshot.forEach((doc) => {
-          data.push(doc.data());
-        });
+          data.push(doc.data())
+        })
         const sortedData = data.sort((a, b) => b.timestamp - a.timestamp)
-        setPosts(sortedData);
+        setPosts(sortedData)
       }
-    );
-    return unsubscribe;
-  }, [ownerName.length]);
+    )
+    return unsubscribe
+  }, [ownerName.length])
 
-  const [matches, setMatches] = useState([]);
+  const [matches, setMatches] = useState([])
   //Estado de apertura de notificaciones de match según la cant de matches, hay n notifs. ej: [true, false, true]
-  const [notifStates, setNotifStates] = useState([]);
+  const [notifStates, setNotifStates] = useState([])
     
   //Búsqueda de matches al cambiar el estado de owner o users
   useEffect(() => {
     const findMatches = () => {
-      const matches = [];
+      const matches = []
       if(owner && users) {
-        const ownerLikes = owner.likes;
-        const otherUsers = users.filter((u) => u.id != owner.id);
+        const ownerLikes = owner.likes
+        const otherUsers = users.filter((u) => u.id != owner.id)
         for(let user of otherUsers) {
           if ( ownerLikes.includes(user.username) && user.likes.includes(owner.username) ) {
-            matches.push(user);
+            matches.push(user)
           }
         }
       }
-      setMatches(matches);
+      setMatches(matches)
       //Inicializa las notificaciones como abiertas
       setNotifStates(
         matches.map((value, i) => (notifStates[i] ? notifStates[i] : true))
-      );
-    };
-    findMatches();
-  }, [owner, users]);
+      )
+    }
+    findMatches()
+  }, [owner, users])
 
   const handleNotifStateChange = (i) => {
-    const nuevaLista = [...notifStates];
-    nuevaLista[i] = !nuevaLista[i];
-    setNotifStates(nuevaLista);
-  };
+    const nuevaLista = [...notifStates]
+    nuevaLista[i] = !nuevaLista[i]
+    setNotifStates(nuevaLista)
+  }
   
   return (
     <>
@@ -127,7 +130,7 @@ export default function HomePage() {
             />
           )
         })}
-        <button type="button" className='specialBtn' onClick={() => setOpenModal(true)}>
+        <button type='button' className='specialBtn' onClick={() => setOpenModal(true)}>
           CONFESAR LIGUE
         </button>
         {openModal && (
@@ -147,9 +150,9 @@ export default function HomePage() {
               key={match.id}
               notifStatesParam={notifStates}
             />
-          );
+          )
         })}
       </div>
     </>
-  );
+  )
 }
