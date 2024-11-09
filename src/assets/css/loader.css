@@ -1,30 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-.modalContainer {
+.Loader__modalContainer {
 	width: 100%;
-	height: 100%;
-	pointer-events: auto;
+	height: 100vh;
 	position: fixed;
 	top: 0;
 	z-index: 2;
-	background: linear-gradient(90deg, #9d50bb, #2a5ce6);
+	display: grid;
 	color: #fefefe;
-	border: 1px solid rgb(24, 24, 24);
-	border-radius: 4px;
-	outline: 0;
-	margin: 0 auto;
-	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	outline: noe;
+	pointer-events: auto;
+	background: linear-gradient(90deg, #9d50bb, #2a5ce6);
 }
 
-.mainLy {
+.Loader__mainLy {
     width: 100%;
-    height: 100%;
+    height: 50%;
     display: grid;
-	place-items: center;
-    grid-template-rows: 100%;
+	place-self: center;
 }
 
-.child {
+.Loader__child {
 	height: 100%;
 	width: 100%;
     display: grid;
@@ -32,15 +28,15 @@
 	text-align: center;
 }
 
-.title {	
+.Loader__title {	
 	line-height: 1.5em;
 }
 
-.font {
+.Loader__font {
     font-family: 'Pacifico', cursive;
 }
 
-.close {
+.Loader__close {
 	font-family: 'Pacifico', cursive;
 	font-size: 2em;
 	text-decoration: underline;

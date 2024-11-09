@@ -118,8 +118,8 @@ export default function HomePage() {
   return (
     <>
       <PageHeader />
-      <h1 className='title'>ADAM LIKES YOU</h1>
-      <div className='container'>
+      <h1 className='Home__title'>ADAM LIKES YOU</h1>
+      <div className='Home__container'>
         {posts.map((post, i, arr) => {
           return (
             <Card
@@ -130,7 +130,7 @@ export default function HomePage() {
             />
           )
         })}
-        <button type='button' className='specialBtn' onClick={() => setOpenModal(true)}>
+        <button type='button' className='Home__specialBtn' onClick={() => setOpenModal(true)}>
           CONFESAR LIGUE
         </button>
         {openModal && (

@@ -1,4 +1,4 @@
-.input {
+.Form__input {
     display: block;
     margin: 7px 0;
     padding: 9px 40px 9px 15px;
@@ -8,13 +8,13 @@
     font-size: 16px;
 }
 
-.alertLabel {
+.Form__alertLabel {
     color: rgba(197, 2, 2, 0.85);
     font-size: 12px;
     display: block;
 }
 
-.formBtn {
+.Form__formBtn {
     margin: 5px;
 	padding: 10px 50px 10px 50px;
 	border-style: none;
@@ -25,22 +25,22 @@
 	font-family: inherit;
 }
 
-.scrollable {
+.Form__scrollable {
     height: 150px;
     overflow: auto;
     overflow-y: scroll;
 }
 
-.mainLy {
+.Form__mainLy {
     padding-bottom: 1.5em;
 }
 
-.label {
+.Form__label {
     color: rgba(70, 70, 70, 0.7);
     font-size: 12px;
 }
 
-.payMsg {
+.Form__payMsg {
     display: block;
     margin: 4px 6px 12px 0;
 }

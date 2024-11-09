@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { auth, firestore } from '../../lib/sdk/firebase'
 import {
   arrayUnion,
@@ -13,12 +13,10 @@ import {
   where,
 } from 'firebase/firestore'
 import { numeroAleatorio } from '../../lib/utils/utils'
-// import { AuthContext } from '../../contexts/AuthContext'
 import '../../assets/css/forms.css'
 
 
 export const MatchForm = () => {
-  // const authData = useContext(AuthContext)
   const [owner, setOwner] = useState()
   const [err, setErr] = useState('')
   const usernameRef = useRef()
@@ -179,14 +177,14 @@ export const MatchForm = () => {
   }
 
   return (
-    <div className='mainLy'>
+    <div className='Form__mainLy'>
       <h2>¡Confiesa tu ligue!</h2>
       <h3>Escribe el username de tu crush</h3>
       <input
         type='text'
         ref={usernameRef}
         placeholder='@micrush'
-        className='input'
+        className='Form__input'
         onChange={(e) => {
           e.preventDefault()
           setMainSubject(e.target.value)
@@ -199,7 +197,7 @@ export const MatchForm = () => {
           // setOpenModal(b => !b)
         }}
         disabled={disabled || !owner}
-        className='formBtn'
+        className='Form__formBtn'
       >
         enviar
       </button>
@@ -208,9 +206,9 @@ export const MatchForm = () => {
         {succesMsg}
       </strong>
       <br />
-      <p className='alertLabel'>{err}</p>
+      <p className='Form__alertLabel'>{err}</p>
       <h3>Lista de usuarios registrados: </h3>
-      <div className='scrollable'>
+      <div className='Form__scrollable'>
         {users.map((usr) => {
           return (
             <span style={{ display: 'block' }} key={usr.username}>

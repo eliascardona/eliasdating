@@ -10,19 +10,19 @@ export const PageHeader = () => {
 
   return (
     <>
-      <header className='headerStyles'>
+      <header className='Header__baseStyle'>
         <div>
           <span 
-            className='linkStyle'
+            className='Header__linkStyle'
             onClick={() => {
               navigate('/')
             }}
           >
-            <span className='text'>
+            <span className='Header__text'>
               DATE UN
             </span>
             {' '}
-            <span className='font'>
+            <span className='Header__font'>
               DATE
             </span>
           </span>

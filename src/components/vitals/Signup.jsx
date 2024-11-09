@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth, firestore } from '../../lib/sdk/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
 import { createUserWithEmailAndPassword, signOut } from 'firebase/auth'
 import { 
   collection,
@@ -95,61 +96,61 @@ const handleSignUp = async (e) => {
   return (
     <>
       <h2>Crear cuenta</h2>
-      <span className='label'>Nombre y Apellido</span>
+      <span className='Form__label'>Nombre y Apellido</span>
       <input
         type='text'
         ref={nameRef}
         placeholder='Nombre'
-        className='input'
+        className='Form__input'
       />
-      <span className='label'>username, no escribir @</span>
+      <span className='Form__label'>username, no escribir @</span>
       <input
         type='text'
         ref={usernameRef}
         onChange={(e) => setUsername(e.target.value)}
         placeholder='username'
-        className='input'
+        className='Form__input'
       />
       {
         showErr && 
-        <span className='alertLabel'>
+        <span className='Form__alertLabel'>
           username en uso, escoge otro 😥
         </span>
       }
-      <span className='label'>Email</span>
+      <span className='Form__label'>Email</span>
       <input
         type='email'
         ref={emailRef}
         placeholder='name@somemail.com'
-        className='input'
+        className='Form__input'
       />
-      <span className='label'>Contraseña</span>
+      <span className='Form__label'>Contraseña</span>
       <input
         type='password'
         ref={passwordRef}
         placeholder='mypass123'
-        className='input'
+        className='Form__input'
       />
       <button
         type='button'
-        className='formBtn'
+        className='Form__formBtn'
         onClick={handleSignUp}
         disabled={usernameAllowed === undefined}
       >
         Sign up
       </button>
-      <small className='payMsg'>
+      <small className='Form__payMsg'>
         ¿Ya tienes cuenta?
         <span 
-            className='text-primary'
+            className='Form__text-primary'
             onClick={() => navigate('/login')}
           >
           <u style={{ cursor: 'pointer' }}>{' '}Iniciar sesión</u>
         </span>
       </small>
-      <small className='payMsg'>
+      <small className='Form__payMsg'>
         Si ingresaste un email incorrecto, haz click
-        <span onClick={logOut} className='text-primary'>
+        <span onClick={logOut} className='Form__text-primary'>
           {' '}
           <u style={{ cursor: 'pointer' }}> aquí</u>
         </span>

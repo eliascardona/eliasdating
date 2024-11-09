@@ -30,10 +30,10 @@ export default function WinnersPage() {
     }, [])
 
     return (
-        <div className='globalContainer'>
-            <div className='mainLy'>
+        <div className='Winners__globalContainer'>
+            <div className='Winners__mainLy'>
                 <div>
-                    <h1 className='title'>GANADORES</h1>
+                    <h1 className='Winners__title'>GANADORES</h1>
                     <h1 style={{color:'red'}}>más guapx hasta ahora</h1>
                     <h2>
                         {

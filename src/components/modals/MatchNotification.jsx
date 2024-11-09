@@ -4,12 +4,12 @@ export const MatchNotification = ({ openNotif, setOpenNotif, notTo, notifStatesP
     return (
     <>
         {openNotif && 
-        <div className='globalContainer'>
-            <div className='modalContainer'>
-                <div className='mainLy' style={{gridTemplateColumns:`${notifStatesParam.length<2?'100%':'8% 82% 8%'}`}}>
+        <div className='Notification__globalContainer'>
+            <div className='Notification__modalContainer'>
+                <div className='Notification__mainLy' style={{gridTemplateColumns:`${notifStatesParam.length<2?'100%':'8% 82% 8%'}`}}>
                     {/* ------------------------- */}
                     <div 
-                        className='child' 
+                        className='Notification__child' 
                         style={{height:'80%', width:'200%', display:`${notifStatesParam.length<2?'none':'block'}`}} 
                         onClick={setOpenNotif}
                     >
@@ -18,8 +18,8 @@ export const MatchNotification = ({ openNotif, setOpenNotif, notTo, notifStatesP
                         </div>
                     </div>
                     {/* ------------------------- */}
-                    <div className='center'>
-                        <h2 className='title'>
+                    <div className='Notification__center'>
+                        <h2 className='Notification__title'>
                             {
                                 notifStatesParam.length < 2 ? 'FELICIDADES, HICISTE MATCH CON' : 'FELICIDADES, ESTOS SON TUS MATCHES'
                             }
@@ -27,13 +27,13 @@ export const MatchNotification = ({ openNotif, setOpenNotif, notTo, notifStatesP
                         <ion-icon style={{fontSize:'64px'}} name='heart'></ion-icon>
                         <h2>{notTo}</h2>
                         <p>¡has hecho match, ve y haz lo tuyo!</p>
-                        <span className='close' style={{display:`${notifStatesParam.length<2?'block':'none'}`}} onClick={setOpenNotif}>
+                        <span className='Notification__close' style={{display:`${notifStatesParam.length<2?'block':'none'}`}} onClick={setOpenNotif}>
                             cerrar
                         </span>
                     </div>
                     {/* ------------------------- */}
                     <div 
-                        className='child' 
+                        className='Notification__child' 
                         style={{height:'80%', width:'200%', display:`${notifStatesParam.length<2?'none':'block'}`}} 
                         onClick={setOpenNotif}
                     >

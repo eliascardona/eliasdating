@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-.headerStyles{
+.Header__baseStyle {
     position: relative;
     top: 0;
     padding: 10px 1rem 13px 1rem;
@@ -13,17 +13,17 @@
     cursor: pointer;
 }
 
-.linkStyle {
+.Header__linkStyle {
     text-decoration: none;
     color: inherit;
     font-size: 18;
     font-weight: 500;
 }
 
-.text {
+.Header__text {
     font-weight: 700;
 }
 
-.font {
+.Header__font {
     font-family: 'Pacifico', cursive;
 }

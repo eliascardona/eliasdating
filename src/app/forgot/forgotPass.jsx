@@ -26,28 +26,28 @@ export default function ForgotPass() {
   return (
     <>
       <PageHeader />
-      <div className='centeredGrid'>
-        <div className='cardWhite'>
+      <div className='Forgot__centeredGrid'>
+        <div className='Forgot__cardWhite'>
           <h2>Recuperar contraseña</h2>
             <span>Ingresa el correo con el que te registraste</span>
             <input
               type='email'
               ref={emailRef}
               placeholder='name@somemail.com'
-              className='input'
+              className='Forgot__input'
             />
             <button
               type='button'
               onClick={requestLink}
-              className='formBtn'
+              className='Forgot__formBtn'
             >
               Enviar código
             </button>
-            <span className='formDynamicMsg' ref={msgRef}>
+            <span className='Forgot__formDynamicMsg' ref={msgRef}>
               {'hemos enviado el código a tu correo electrónico, revisa tu bandeja de entrada'}
             </span>
             <small 
-              className='formMsg' 
+              className='Forgot__formMsg' 
               onClick={() => navigate('/login')}
             >
               Regresar al login

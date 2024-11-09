@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../../lib/sdk/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
 import '../../assets/css/forms.css'

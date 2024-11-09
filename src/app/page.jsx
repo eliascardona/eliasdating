@@ -16,9 +16,12 @@ function LoaderUIHandler({ loading, setLoading, children }) {
         loading ? (
           <Loader />
         ) : (
-          <div id='applicationsContent'>
-            {children}
-          </div>
+          <>
+            <Loader />
+            {/* <div id='applicationsContent'>
+              {children}
+            </div> */}
+          </>
         )
       }
     </>

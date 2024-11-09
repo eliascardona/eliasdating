@@ -1,4 +1,4 @@
-.card {
+.Card__card {
 	width: 85%;
 	margin-top: 15px;
 	padding: 30px 50px 35px 30px;
@@ -7,7 +7,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 2px 5px 0px;
 }
 
-.cardLyOne {
+.Card__cardLyOne {
 	display: grid;
 	grid-template-columns: 100%;
 	column-gap: 8%;
@@ -15,14 +15,14 @@
 	justify-self: center;
 }
 
-.iconContainer {
+.Card__iconContainer {
 	padding: 3px 5px;
 	border: 1px solid #0a0a0a;
 	border-radius: 5px;
 	cursor: pointer;
 }
 
-.cardImage {
+.Card__cardImage {
 	margin-top: 15px;
 	padding: 20px;
 	color: #0a0a0a;

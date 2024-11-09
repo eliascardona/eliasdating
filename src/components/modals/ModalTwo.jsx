@@ -4,11 +4,11 @@ import '../../assets/css/modal.css'
 export const ModalTwo = ({ openModal, setOpenModal }) => {
     return (
         openModal &&
-        <div className='globalContainer'>
-            <div className='modalContainer'>
-                <div className='mainLy'>
+        <div className='Modal__globalContainer'>
+            <div className='Modal__modalContainer'>
+                <div className='Modal__mainLy'>
                     <MatchForm />
-                    <button type='button' className='specialBtn' onClick={() => setOpenModal(false)}>
+                    <button type='button' className='Modal__specialBtn' onClick={() => setOpenModal(false)}>
                         cerrar
                     </button>
                 </div>

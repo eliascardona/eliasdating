@@ -6,8 +6,8 @@ export default function SignUpPage() {
   return (
     <>
       <PageHeader />
-      <div className='centeredGrid'>
-        <div className='cardWhite'>
+      <div className='Login__centeredGrid'>
+        <div className='Login__cardWhite'>
           <Signup />
         </div>
       </div>

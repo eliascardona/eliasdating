@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-.globalContainer {
+.Notification__globalContainer {
 	width: 100%;
 	height: 100%;
 	background-color: rgb(46 56 77 / 30%);
@@ -10,7 +10,7 @@
 	align-self: center;
 }
 
-.modalContainer {
+.Notification__modalContainer {
 	width: 100%;
 	height: 100%;
 	pointer-events: auto;
@@ -26,15 +26,15 @@
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.mainLy {
-    display: grid;
+.Notification__mainLy {
+	width: 92%;
+	display: grid;
+	justify-self: center;
 	place-items: center;
-	/* grid-template-columns: 8% 82% 8%; */
-	padding: 9.5em 0 5em 0;
 }
 
-.child {
-	padding: 0 1em 0 1em;
+.Notification__child {
+	padding: 0 1rem;
     display: grid;
 	place-items: center;
 	text-align: center;
@@ -42,19 +42,19 @@
 	width:200%;
 }
 
-.center {
+.Notification__center {
     display: grid;
 	place-items: center;
 	row-gap: 1.5em;
 	text-align: center;
 }
 
-.title {
+.Notification__title {
 	font-family: 'Pacifico', cursive;
 	line-height: 1.5em;
 }
 
-.close {
+.Notification__close {
 	font-family: 'Pacifico', cursive;
 	font-size: 2em;
 	text-decoration: underline;

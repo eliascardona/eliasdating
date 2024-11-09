@@ -1,10 +1,10 @@
-.btnPos {
+.Button__btnPos {
 	position: fixed;
 	bottom: 50px;
 	left: 27px;
 }
 
-.specialBtn {
+.Button__specialBtn {
     width: 110%;
     margin: 5px;
 	padding: 10px 50px 10px 50px;
