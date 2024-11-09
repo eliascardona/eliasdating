@@ -6,6 +6,7 @@ import LoginPage from './login/login'
 import ForgotPass from './forgot/forgotPass'
 import WinnersPage from './winners/winners'
 import HomePage from './home/home'
+import PageHeader from '../components/utils/PageHeader'
 import Loader from '../components/Loader'
 
 function LoaderUIHandler({ loading, setLoading, children }) {
@@ -17,6 +18,7 @@ function LoaderUIHandler({ loading, setLoading, children }) {
           <Loader />
         ) : (
           <div id='applicationContent'>
+            <PageHeader />
             {children}
           </div>
         )

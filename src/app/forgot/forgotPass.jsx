@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../../lib/sdk/firebase'
 import { sendPasswordResetEmail } from 'firebase/auth'
-import { PageHeader } from '../../components/utils/PageHeader'
 
 import '../../assets/css/forgotPassword.css'
 
@@ -25,7 +24,6 @@ export default function ForgotPass() {
   
   return (
     <>
-      <PageHeader />
       <div className='Forgot__centeredGrid'>
         <div className='Forgot__cardWhite'>
           <h2>Recuperar contraseña</h2>

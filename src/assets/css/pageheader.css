@@ -10,7 +10,6 @@
     grid-template-columns: 50% 50%;
     place-items: center;
     border-bottom: 4px solid rgb(0 102 255);
-    cursor: pointer;
 }
 
 .Header__linkStyle {

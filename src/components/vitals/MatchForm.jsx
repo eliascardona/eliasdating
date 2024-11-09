@@ -48,9 +48,14 @@ export const MatchForm = () => {
       collection(firestore, 'users'),
       where('email', '==', auth.currentUser ? auth.currentUser.email : '')
     )
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      querySnapshot.docs[0] && setOwner(querySnapshot.docs[0].data())
-    })
+    const unsubscribe = onSnapshot(q,
+      (snap) => {
+        const snapData = snap.docs[0].data()
+        if(snapData != null) {
+          setOwner(snapData)
+		}
+      }
+	)
     return unsubscribe
   }, [auth])
 
@@ -110,26 +115,33 @@ export const MatchForm = () => {
         setErr('')        
         return
       }
-      let docID = `p${numeroAleatorio()}`
       let date = new Date()
       await updateDoc(doc(firestore, 'users', objetoDestinatario.email), {
         likes: arrayUnion(owner.username),
       })
-      const updatedDestinatario = await getDoc(doc(firestore, 'users', objetoDestinatario.email)).then((doc) => doc.data())
+      const updatedDestinatario = await getDoc(
+        doc(firestore, 'users', objetoDestinatario.email)
+	  )
+      .then((doc) => {
+        doc.data()
+      })
 
       if(updatedDestinatario.likes.length > ganadores.porMasLikes.likes) {
-        setDoc(doc(firestore, 'ganadores', 'porMasLikes'), {
+        await setDoc(doc(firestore, 'ganadores', 'porMasLikes'), {
           likes: updatedDestinatario.likes.length,
           username: updatedDestinatario.username
         })
       }
-
-      await setDoc(doc(firestore, 'posts', docID), {
+      const newConfessionPayload = {
         remitente: owner.username,
         destinatario: mainSubject,
-        cardID: docID,
         timestamp: date.getTime(),
-      })
+      }
+
+      const newDocRef = await addDoc(doc(firestore, 'posts'), newConfessionPayload)
+      await updateDoc(newDocRef, {
+        cardID: newDocRef.id
+	  })
 
       //Verificar si hay match viendo si existe el perfil en los likes del remitente
       if (objetoRemitente.includes(objetoDestinatario.username)) {
@@ -173,7 +185,7 @@ export const MatchForm = () => {
     setSuccesMsg('Confesión enviada con éxito')
     setTimeout(() => {
       setSuccesMsg('')
-    }, 4000)
+    }, 2000)
   }
 
   return (
@@ -210,8 +222,9 @@ export const MatchForm = () => {
       <h3>Lista de usuarios registrados: </h3>
       <div className='Form__scrollable'>
         {users.map((usr) => {
+          let random = Math.random()
           return (
-            <span style={{ display: 'block' }} key={usr.username}>
+            <span style={{ display: 'block' }} key={`${usr.username}__${random}`}>
               {usr.username}
             </span>
           )

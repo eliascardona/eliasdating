@@ -9,7 +9,6 @@ import {
   where,
 } from 'firebase/firestore'
 import { Card } from '../../components/utils/Card'
-import { PageHeader } from '../../components/utils/PageHeader'
 import { ModalTwo } from '../../components/modals/ModalTwo'
 import { MatchNotification } from '../../components/modals/MatchNotification'
 import '../../assets/css/home.css'
@@ -117,7 +116,6 @@ export default function HomePage() {
   
   return (
     <>
-      <PageHeader />
       <h1 className='Home__title'>ADAM LIKES YOU</h1>
       <div className='Home__container'>
         {posts.map((post, i, arr) => {

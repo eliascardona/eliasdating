@@ -7,14 +7,15 @@ import { onAuthStateChanged } from 'firebase/auth'
 import '../../assets/css/pageheader.css'
 
 
-export const PageHeader = () => {
+export default function PageHeader() {
   const navigate = useNavigate()
   const [logoutVisible, setLogoutVisible] = useState(false)
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if(user) {
-        setLogoutVisible(true)
+        setLogoutVisible(b => !b)
+        console.log(`DESDE PAGE HEADER --${user.uid}`)
 	  }
       setLogoutVisible(false)
 	})

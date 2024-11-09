@@ -1,13 +1,11 @@
 import { Signup } from '../../components/vitals/Signup'
-import { PageHeader } from '../../components/utils/PageHeader'
-import '../../assets/css/login.css'
+import '../../assets/css/signup.css'
 
 export default function SignUpPage() {
   return (
     <>
-      <PageHeader />
-      <div className='Login__centeredGrid'>
-        <div className='Login__cardWhite Login__cardWMargin'>
+      <div className='SignUp__centeredGrid'>
+        <div className='SignUp__cardWhite'>
           <Signup />
         </div>
       </div>

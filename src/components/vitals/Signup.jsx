@@ -114,7 +114,7 @@ const handleSignUp = async (e) => {
       {
         showErr && 
         <span className='Form__alertLabel'>
-          username en uso, escoge otro 😥
+          username en uso, escoge otro
         </span>
       }
       <span className='Form__label'>Email</span>
