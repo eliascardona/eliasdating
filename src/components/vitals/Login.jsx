@@ -39,31 +39,31 @@ export const Login = () => {
   return (
     <>
       <h2>Acceso</h2>
-        <span>Email</span>
+        <span className='Form__label'>Email</span>
         <input
           type='email'
           ref={emailRef}
           placeholder='name@somemail.com'
-          className='input'
+          className='Form__input'
         />
-        <span>Contraseña</span>
+        <span className='Form__label'>Contraseña</span>
         <input
           type='password'
           ref={passwordRef}
           placeholder='mypass123'
-          className='input'
+          className='Form__input'
         />
         <button
           type='button'
           onClick={login}
-          className='formBtn'
+          className='Form__formBtn'
         >
-          Login
+          Acceder
         </button>
-        <small className='payMsg' style={{color:'red'}}>
+        <small className='Form__payMsg' style={{color:'red'}}>
           {error}
         </small>
-        <small className='payMsg'>
+        <small className='Form__payMsg'>
           ¿Nuevo por aquí?
           <span 
             className='text-primary'

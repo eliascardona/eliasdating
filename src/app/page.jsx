@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { routerListenerHook } from '../lib/hooks/navigation'
 import SignUpPage from './signup/signup'
 import LoginPage from './login/login'
 import ForgotPass from './forgot/forgotPass'
 import WinnersPage from './winners/winners'
 import HomePage from './home/home'
 import Loader from '../components/Loader'
-import { routerListenerHook } from '../lib/hooks/navigation'
 
 function LoaderUIHandler({ loading, setLoading, children }) {
   routerListenerHook(setLoading)
@@ -16,12 +16,9 @@ function LoaderUIHandler({ loading, setLoading, children }) {
         loading ? (
           <Loader />
         ) : (
-          <>
-            <Loader />
-            {/* <div id='applicationsContent'>
-              {children}
-            </div> */}
-          </>
+          <div id='applicationContent'>
+            {children}
+          </div>
         )
       }
     </>

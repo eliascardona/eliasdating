@@ -4,7 +4,7 @@ import {
   doc,
   onSnapshot,
 } from 'firebase/firestore'
-import '../../assets/css/stats.css'
+import '../../assets/css/winners.css'
 
 export default function WinnersPage() {
     const [masLikes, setMasLikes] = useState(null)

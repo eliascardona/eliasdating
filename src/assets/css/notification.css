@@ -2,7 +2,6 @@
 
 .Notification__globalContainer {
 	width: 100%;
-	height: 100%;
 	background-color: rgb(46 56 77 / 30%);
 	z-index: 0;
 	display: grid;
@@ -11,8 +10,9 @@
 }
 
 .Notification__modalContainer {
+	display: grid;
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	pointer-events: auto;
 	position: fixed;
 	top: 0;
@@ -28,18 +28,18 @@
 
 .Notification__mainLy {
 	width: 92%;
+	height: 50%;
 	display: grid;
-	justify-self: center;
-	place-items: center;
+	place-self: center;
 }
 
 .Notification__child {
-	padding: 0 1rem;
+	width: 100%;
+	height: 100%;
     display: grid;
+	padding: 0 1rem;
+	place-self: center;
 	place-items: center;
-	text-align: center;
-	height:80%;
-	width:200%;
 }
 
 .Notification__center {

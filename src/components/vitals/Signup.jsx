@@ -137,7 +137,7 @@ const handleSignUp = async (e) => {
         onClick={handleSignUp}
         disabled={usernameAllowed === undefined}
       >
-        Sign up
+        crear cuenta
       </button>
       <small className='Form__payMsg'>
         ¿Ya tienes cuenta?

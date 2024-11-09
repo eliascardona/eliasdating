@@ -1,12 +1,24 @@
-import { auth } from '../../lib/sdk/firebase'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { auth } from '../../lib/sdk/firebase'
 import { signOut } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
 
 import '../../assets/css/pageheader.css'
 
 
 export const PageHeader = () => {
   const navigate = useNavigate()
+  const [logoutVisible, setLogoutVisible] = useState(false)
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if(user) {
+        setLogoutVisible(true)
+	  }
+      setLogoutVisible(false)
+	})
+  }, [auth])
 
   return (
     <>
@@ -27,11 +39,12 @@ export const PageHeader = () => {
             </span>
           </span>
         </div>
-        <div>
-          <h4 onClick={() => signOut(auth)}>
+        {
+          logoutVisible && 
+          <div onClick={() => signOut(auth)}>
             <ion-icon name='exit-outline'></ion-icon>
-          </h4>
-        </div>
+          </div>
+        }
       </header>
     </>
   )

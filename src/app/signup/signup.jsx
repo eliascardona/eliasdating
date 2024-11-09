@@ -7,7 +7,7 @@ export default function SignUpPage() {
     <>
       <PageHeader />
       <div className='Login__centeredGrid'>
-        <div className='Login__cardWhite'>
+        <div className='Login__cardWhite Login__cardWMargin'>
           <Signup />
         </div>
       </div>

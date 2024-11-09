@@ -10,7 +10,7 @@ export const MatchNotification = ({ openNotif, setOpenNotif, notTo, notifStatesP
                     {/* ------------------------- */}
                     <div 
                         className='Notification__child' 
-                        style={{height:'80%', width:'200%', display:`${notifStatesParam.length<2?'none':'block'}`}} 
+                        style={{display:`${notifStatesParam.length<2?'none':'block'}`}} 
                         onClick={setOpenNotif}
                     >
                         <div>
@@ -34,7 +34,7 @@ export const MatchNotification = ({ openNotif, setOpenNotif, notTo, notifStatesP
                     {/* ------------------------- */}
                     <div 
                         className='Notification__child' 
-                        style={{height:'80%', width:'200%', display:`${notifStatesParam.length<2?'none':'block'}`}} 
+                        style={{display:`${notifStatesParam.length<2?'none':'block'}`}} 
                         onClick={setOpenNotif}
                     >
                         <div>

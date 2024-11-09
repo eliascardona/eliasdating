@@ -18,14 +18,7 @@
     height: 50%;
     display: grid;
 	place-self: center;
-}
-
-.Loader__child {
-	height: 100%;
-	width: 100%;
-    display: grid;
 	place-items: center;
-	text-align: center;
 }
 
 .Loader__title {	
